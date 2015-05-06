@@ -1,0 +1,225 @@
+<!DOCTYPE HTML>
+<!--
+	Prologue by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Belvoir Bakery - Future Enabled Bread</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.scrolly.min.js"></script>
+		<script src="js/jquery.scrollzer.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+        <script src="js/freewall.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-wide.css" />
+		</noscript>
+		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<div id="header" class="skel-layers-fixed">
+
+				<div class="top">
+
+					<!-- Logo -->
+						<div id="logo">
+							<span class="image avatar48"><img src="images/avatar.jpg" alt="" /></span>
+							<h1 id="title">Belvoir Bakery</h1>
+							<p>Future Enabled Bread</p>
+						</div>
+
+					<!-- Nav -->
+						
+						
+				</div>
+				<form class="receipt" style="">
+                
+                </form>
+				<div class="bottom">
+
+					<!-- Social Icons -->
+						<ul class="icons">
+							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+							<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+							<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
+						</ul>
+				
+				</div>
+			
+			</div>
+
+		<!-- Main -->
+			<div id="main">
+                <h2 class="center">Welcome to the BreadWall.</h2>
+                <div class="center">
+                    <input type="text" class="center" placeholder="Search" />
+                </div>
+
+				<div id="freewall">
+                    <!--Bread goes here-->
+                </div>
+                <script type="text/javascript">
+                    var wall = new freewall("#freewall");
+                    wall.reset({
+                        selector: '.brick',
+                        animate: true,
+                        cellW: 250,
+                        cellH: 'auto',
+                        gutterY: 35,
+                        onResize: function() {
+                            wall.fitWidth();
+                        }
+                    });
+
+                    wall.container.find('.brick img').load(function() {
+                        wall.fitWidth();
+                    });
+                    
+                    //Add .indexOf for >IE9 -- sigh
+                    if (!Array.prototype.indexOf){
+                        Array.prototype.indexOf = function(elt /*, from*/){
+                            var len = this.length >>> 0;
+
+                            var from = Number(arguments[1]) || 0;
+                            from = (from < 0)
+                                ? Math.ceil(from)
+                                : Math.floor(from);
+                            if (from < 0)
+                                from += len;
+
+                            for (; from < len; from++){
+                                if (from in this &&
+                                    this[from] === elt)
+                                    return from;
+                            }
+                            return -1;
+                        };
+                    }
+                    
+                    var treeData;
+
+                    var oReq = new XMLHttpRequest();
+                    oReq.onload = reqListener;
+                    oReq.open("get", "breads.json", true);
+                    oReq.send();
+
+                    var orderList = [];
+                    //load orderList from cookies here
+                    updateReceipt();
+
+                    function reqListener(e) {
+                        breadData = JSON.parse(this.responseText);
+                        var html = "";
+                        $.each(breadData, function(i, bread) {
+                            html = '<div class="brick '+ bread.id +'">\
+                                        <img class="img" src="'+ bread.imgSrc +'" />\
+                                        <h3>'+ bread.name +'</h3>\
+                                        <h5>'+ bread.description +'</h5>\
+                                        <span class="hide noSelect bubble"></span>\
+                                        <a class="buy button noSelect bread">Add: £'+ bread.price.toFixed(2) +'</a>\
+                                        <br />\
+                                    </div>';
+                            wall.appendBlock(html);
+                            $('.brick.' + bread.id + ' .buy.bread').click(function() {
+                                buyHandler(bread.id); 
+                            });
+                            $('.brick.' + bread.id + ' .bubble').click(function() {
+                                deleteHandler(bread.id); 
+                            });
+                        });
+                    }
+                    function buyHandler(id){
+                        //check if item has already been ordered
+                        var append = 0;
+                        for (i = 0; i < orderList.length; i++) {
+                            if (orderList[i].id == id){
+                                //update list
+                                orderList[i].num++;
+                                append = 1;
+                                break;
+                            }
+                        //convert order list to json
+                        //add json order list to cookies
+                        }
+                        if (append == 0){
+                            //append to list
+                            orderList.push({"id": id, "num": 1});
+                        }
+                        updateReceipt();
+                    }
+                    function deleteHandler(id){
+                        for (i = 0; i < orderList.length; i++) {
+                            if (orderList[i].id == id){
+                                //This is how javascript removes array elements -- sigh
+                                //Hide bubble
+                                $('.brick.' + orderList[i].id + ' .bubble').html("")
+                                    .addClass('hide');
+                                orderList.splice(i, 1);
+                                break;
+                            }
+                        }
+                        updateReceipt();
+                    }
+                    function spinChangeHandler(id){
+                        for (i = 0; i < orderList.length; i++) {
+                            var order = orderList[i];
+                            if (order.id == id){
+                                orderList[i].num = $('.'+ order.id +' .numSpinner').val();
+                                updateReceipt();
+                                break;
+                            }
+                        }
+                    }
+                    function updateReceipt(){
+                        $('.receipt').empty()
+                        for (var i = 0; i < orderList.length; i++) {
+                            var order = orderList[i];
+                            for (var z = 0; z < breadData.length; z++) {
+                                if (order.id == breadData[z].id){
+                                    var bread = breadData[z];
+                                    break;
+                                }
+                            }
+                            var html = '\
+                            <div class="item '+ order.id +'">\
+                                <span class="rTitle">'+ bread.name +'</span>\
+                                <input min="1" onchange="spinChangeHandler(\''+ order.id +'\');" class="numSpinner" type="number" value="'+ order.num +'" />\
+                                <a class="icon fa-trash delete" onclick="deleteHandler(\''+ order.id +'\')">\
+                                    <span class="noSelect label">\
+                                        Delete\
+                                    </span>\
+                                </a>\
+                            </div>';
+                            $('.receipt').append(html);
+                            if (order.num == 0){
+                                //Should never happen
+                                $('.brick.' + bread.id + ' .bubble').html("");
+                            }
+                            else {
+                                $('.brick.' + bread.id + ' .bubble').removeClass('hide')
+                                    .html(order.num);
+                            }
+                        }
+                    }
+
+
+                </script>
+
+		
+
+	</body>
+</html>

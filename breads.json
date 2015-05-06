@@ -1,0 +1,45 @@
+[
+    {
+        "name":"White Tin",
+        "imgSrc":"images/whiteTin.jpg",
+        "id":"whiteTin",
+        "description":"White bread",
+        "price":3.50
+    },
+    {
+        "name":"Sundried Tomato",
+        "imgSrc":"images/sunDried.jpg",
+        "id":"sunDried",
+        "description":"It's bread, with sundried tomatoes in. What more could you as for?",
+        "price":3.40
+    },
+    {
+        "name":"Sunflour and Honey",
+        "imgSrc":"images/sunHoney.jpg",
+        "id":"sunHoney",
+        "description":"Honey fresh from the bees, and flowers fresh from the sun.",
+        "price":3.40
+    },
+    {
+        "name":"Spelt",
+        "imgSrc":"images/spelt.jpg",
+        "id":"spelt",
+        "description":"Bread for those who can't eat bread. We got you covered.",
+        "price":3.40
+    },
+    {
+        "name":"Large Granary",
+        "imgSrc":"images/lGranary.jpg",
+        "id":"lGranary",
+        "description":"",
+        "price":3.40
+    },
+    
+    {
+        "name":"Wholemeal Tin",
+        "imgSrc":"images/wholemealTin.jpg",
+        "id":"wholemealTin",
+        "description":"Brown bread",
+        "price":3.40
+    }
+]
