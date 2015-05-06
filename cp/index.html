@@ -17,62 +17,35 @@
   <link rel="import" href="../components/core-pages/core-pages.html">
   <link rel="import" href="post-list.html">
 
-  <style>
-    html,body {
-      height: 100%;
-      margin: 0;
-      background-color: #E5E5E5;
-      font-family: 'RobotoDraft', sans-serif;
-    }
-    core-header-panel {
-      height: 100%;
-      overflow: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    core-toolbar {
-      background: #03a9f4;
-      color: white;
-    }
-    #tabs {
-      width: 100%;
-      margin: 0;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-  	text-transform: uppercase;
-    }
-    .container {
-      width: 80%;
-      margin: 50px auto;
-    }
-    @media (min-width: 481px) {
-      #tabs {
-        width: 200px;
-      }
-      .container {
-        width: 400px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="css/style.css">
 
 </head>
 
 <body><polymer-element name="my-element">
 
   <template>
+    <style>
+      paper-tabs.white::shadow #selectionBar {
+        background-color: #fff;
+      }
+
+      paper-tabs.white paper-tab::shadow #ink {
+        color: #fff;
+      }
+    </style>
 
     <!--toolbar-->
     <core-toolbar class="medium-tall">
       <paper-icon-button icon="menu"></paper-icon-button>
-      <div flex>Title</div>
+      <div flex>Bread Control Core</div>
       <paper-icon-button icon="search"></paper-icon-button>
       <paper-icon-button icon="more-vert"></paper-icon-button>
       <div layout horizontal class="bottom fit">
-        <paper-tabs selected="0" selectedindex="0" id="tabs" {{selected}}"" flex layout center horizontal>
-          <paper-tab id="paper_tab2" layout horizontal center-center flex inline active>ITEM ONE</paper-tab>
-          <paper-tab id="paper_tab" layout horizontal center-center flex inline>ITEM TWO</paper-tab>
-          <paper-tab id="paper_tab1" layout horizontal center-center flex inline>ITEM THREE</paper-tab>
+        <paper-tabs class="white" selected="0" {{selected}} flex layout center horizontal>
+          <paper-tab id="paper_tab1" layout horizontal center-center flex inline active>Order Bread</paper-tab>
+          <paper-tab id="paper_tab2" layout horizontal center-center flex inline>Record Waste</paper-tab>
+          <paper-tab id="paper_tab3" layout horizontal center-center flex inline>Review Sales</paper-tab>
+          <paper-tab id="paper_tab4" layout horizontal center-center flex inline>Export</paper-tab>
         </paper-tabs>
       </div>
     </core-toolbar>
@@ -80,7 +53,9 @@
     <!--content-->
     <core-pages selected="{{ $.tabs.selected }}" selectedindex="0" notap id="core_pages">
       <section id="section" active>
-        <paper-input value="5" label="White Tin" floatinglabel id="paper_input"></paper-input>
+        <form id="orderBread">
+          <paper-input value="5" label="White Tin" floatinglabel id="paper_input"></paper-input>
+        </form>
       </section>
       <section id="section1">
         Page Two
