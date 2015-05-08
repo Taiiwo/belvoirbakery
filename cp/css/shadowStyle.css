@@ -1,0 +1,67 @@
+core-toolbar {
+  background-color: #dd1337;
+  color: white;
+}
+paper-tabs.white::shadow #selectionBar {
+  background-color: #fff;
+}
+
+paper-tabs.white paper-tab::shadow #ink {
+  color: #fff;
+}
+paper-tabs.red::shadow #selectionBar {
+  background-color: #dd1337;
+}
+
+paper-tabs.red paper-tab::shadow #ink {
+  color: #fff;
+}
+#orderBread {
+  left: 20px;
+  position: relative;
+  width: calc(100% - 40px);
+  text-align: center;
+}
+#days{
+  /*max-width: 701px;*/
+  margin: auto;
+}
+paper-tabs#days  paper-tab::shadow div.tab-content{
+  margin: 0 14.28571428571428571428571428571428571428571px !important;
+}
+paper-button.red{
+  background: #dd1337;
+  color: #FAFAFA;
+}
+
+paper-button#submit{
+  position: relative;
+  top: 30px;
+}
+
+paper-slider::shadow #sliderBar::shadow #activeProgress,
+  paper-slider::shadow #sliderKnobInner,
+  paper-slider::shadow #sliderKnobInner::before {
+    background-color: #dd1337;
+}
+paper-input.red /deep/ .focused-underline {
+  background-color: #dd1337;
+}
+paper-input.red /deep/ paper-input-decorator[focused] .label-text{
+  color: #dd1337;
+}
+paper-input {
+  text-align: left;
+}
+.spinner {
+  display: inline-block;
+}
+.spinner div, .spinner paper-slider {
+  display: block;
+}
+#numOfBread {
+  max-width: 800px;
+  margin: auto;
+  position: relative;
+  top: 30px;
+}
