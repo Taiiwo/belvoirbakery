@@ -3,22 +3,31 @@ function loadForm(){
     { com: "breads" },
     function(data, status){
       for(var i in data){
-        $(prefix + '#numOfBread').append(/*
-          $('<div/>').append(
-            $('<span/>')
-              .text(data[i]['breadName'])
-          ).append(
-            $('<paper-slider/>')
-              .attr('value', 5)
-              .attr('editable',"")
-              .attr('pin',"")
-          ).addClass("spinner")*/
-          $('<paper-input/>')
+        var input = $('<paper-input/>')
+          .attr('label', data[i]['breadName'])
+          .attr('floatingLabel', '')
+          .attr('value', 5)
+          .addClass('red')
+          .addClass('custom');
+        /*
+        var input = $('<div/>').append(
+          $('<span/>')
+            .text(data[i]['breadName'])
+        ).append(
+          $('<paper-slider/>')
             .attr('value', 5)
-            .attr('label', data[i]['breadName'])
-            .attr('floatingLabel', '')
+            .attr('editable',"")
+            .attr('pin',"")
+        ).addClass("spinner")
+        */
+        $(prefix + '#numOfBread').append(
+          input
         );
       }
+      $('body /deep/ paper-input-decorator').attr('focused', '');
+      setTimeout( function() {
+        $('body /deep/ paper-input-decorator').removeAttr('focused', '');
+      });
     },
     'json'
   );

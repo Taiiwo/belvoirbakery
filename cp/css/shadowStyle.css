@@ -20,11 +20,23 @@ paper-tabs.red paper-tab::shadow #ink {
   left: 20px;
   position: relative;
   width: calc(100% - 40px);
-  text-align: center;
+  height: 100%;
+}
+#numOfBread {
+  display: inline-block;
+  float: left;
+  max-width: 800px;
+  margin: 30px;
+  position: relative;
 }
 #days{
   /*max-width: 701px;*/
   margin: auto;
+}
+#submit {
+  position: fixed;
+  right: 60px;
+  bottom: 60px;
 }
 paper-tabs#days  paper-tab::shadow div.tab-content{
   margin: 0 14.28571428571428571428571428571428571428571px !important;
@@ -34,22 +46,12 @@ paper-button.red{
   color: #FAFAFA;
 }
 
-paper-button#submit{
-  position: relative;
-  top: 30px;
-}
-
 paper-slider::shadow #sliderBar::shadow #activeProgress,
   paper-slider::shadow #sliderKnobInner,
   paper-slider::shadow #sliderKnobInner::before {
     background-color: #dd1337;
 }
-paper-input.red /deep/ .focused-underline {
-  background-color: #dd1337;
-}
-paper-input.red /deep/ paper-input-decorator[focused] .label-text{
-  color: #dd1337;
-}
+
 paper-input {
   text-align: left;
 }
@@ -59,9 +61,26 @@ paper-input {
 .spinner div, .spinner paper-slider {
   display: block;
 }
-#numOfBread {
-  max-width: 800px;
-  margin: auto;
-  position: relative;
-  top: 30px;
+
+
+.custom /deep/ #decorator[focused] /deep/ .floated-label .label-text {
+  color: #dd1337;
+}
+
+.custom /deep/ .focused-underline {
+  background-color: #dd1337;
+}
+d-calendar {
+  margin: 0px 12px;
+  box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
+  display: inline-block;
+  float: left;
+}
+d-calendar /deep/ #wrapper #selectedDateHeader {
+  color: #FFF;
+  background: #fe4d40;
+}
+d-calendar /deep/ #wrapper #selectedWeekdayHeader {
+  color: #FFF;
+  background: #f44336;
 }

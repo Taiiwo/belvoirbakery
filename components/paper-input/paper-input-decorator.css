@@ -67,6 +67,7 @@ polyfill-next-selector {
   font-size: 0.75em;
   background: transparent;
   white-space: nowrap;
+  color: #dd1337;
 }
 
 .mirror-text {
@@ -103,7 +104,7 @@ polyfill-next-selector {
 }
 
 :host([disabled]) .underline {
-  border-bottom: 1px dashed #757575;
+  border-bottom: 1px dashed #dd1337;
 }
 
 .unfocused-underline {

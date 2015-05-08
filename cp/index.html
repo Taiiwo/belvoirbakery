@@ -19,6 +19,7 @@
   <link rel="import" href="../components/paper-button/paper-button.html">
   <link rel="import" href="../components/paper-slider/paper-slider.html">
   <link rel="import" href="../components/core-pages/core-pages.html">
+  <link rel="import" href="../components/d-calendar/d-calendar.html">
   <link rel="import" href="post-list.html">
 
   <link rel="stylesheet" href="css/style.css">
@@ -61,11 +62,12 @@
           </paper-tabs>
           <paper-tabs class="red core-narrow" id="recipient" selected="0">
 
-            <paper-tab id="monday" layout horizontal center-center flex inline>Tracey</paper-tab>
-            <paper-tab id="tuesday" layout horizontal center-center flex inline>Rob</paper-tab>
-            <paper-tab id="wednesday" layout horizontal center-center flex inline>Martin</paper-tab>
+            <paper-tab layout horizontal center-center flex inline>Tracey</paper-tab>
+            <paper-tab layout horizontal center-center flex inline>Rob</paper-tab>
+            <paper-tab layout horizontal center-center flex inline>Martin</paper-tab>
 
           </paper-tabs>
+          <d-calendar class="light-theme"></d-calendar>
           <div id="numOfBread"></div>
           <paper-button id="submit" class="red">Place Order</paper-button>
         </form>
