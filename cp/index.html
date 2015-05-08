@@ -3,17 +3,21 @@
 
 <head>
 
-  <title>unquote</title>
+  <title>Belvoir Bakery - Bread Control Core</title>
 
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script src="../components/webcomponentsjs/webcomponents.js"></script>
+  <script src="js/script.js"></script>
 
   <link rel="import" href="../components/font-roboto/roboto.html">
   <link rel="import" href="../components/core-header-panel/core-header-panel.html">
   <link rel="import" href="../components/core-toolbar/core-toolbar.html">
   <link rel="import" href="../components/paper-tabs/paper-tabs.html">
   <link rel="import" href="../components/paper-input/paper-input.html">
+  <link rel="import" href="../components/paper-button/paper-button.html">
+  <link rel="import" href="../components/paper-slider/paper-slider.html">
   <link rel="import" href="../components/core-pages/core-pages.html">
   <link rel="import" href="post-list.html">
 
@@ -21,18 +25,10 @@
 
 </head>
 
-<body><polymer-element name="my-element">
-
+<body>
+<polymer-element name="my-element">
   <template>
-    <style>
-      paper-tabs.white::shadow #selectionBar {
-        background-color: #fff;
-      }
-
-      paper-tabs.white paper-tab::shadow #ink {
-        color: #fff;
-      }
-    </style>
+    <link rel="stylesheet" href="css/shadowStyle.css">
 
     <!--toolbar-->
     <core-toolbar class="medium-tall">
@@ -41,7 +37,7 @@
       <paper-icon-button icon="search"></paper-icon-button>
       <paper-icon-button icon="more-vert"></paper-icon-button>
       <div layout horizontal class="bottom fit">
-        <paper-tabs class="white" selected="0" {{selected}} flex layout center horizontal>
+        <paper-tabs class="white" selected="0" id="tabs" {{selected}} flex scrollable layout center horizontal>
           <paper-tab id="paper_tab1" layout horizontal center-center flex inline active>Order Bread</paper-tab>
           <paper-tab id="paper_tab2" layout horizontal center-center flex inline>Record Waste</paper-tab>
           <paper-tab id="paper_tab3" layout horizontal center-center flex inline>Review Sales</paper-tab>
@@ -51,10 +47,28 @@
     </core-toolbar>
 
     <!--content-->
-    <core-pages selected="{{ $.tabs.selected }}" selectedindex="0" notap id="core_pages">
+    <core-pages selected="{{$.tabs.selected}}" selectedindex="0" notap id="core_pages">
       <section id="section" active>
         <form id="orderBread">
-          <paper-input value="5" label="White Tin" floatinglabel id="paper_input"></paper-input>
+          <paper-tabs class="red core-narrow" id="days" selected="0" >
+            <paper-tab id="monday" layout horizontal center-center flex inline>Monday</paper-tab>
+            <paper-tab id="tuesday" layout horizontal center-center flex inline>Tuesday</paper-tab>
+            <paper-tab id="wednesday" layout horizontal center-center flex inline>Wednesday</paper-tab>
+            <paper-tab id="thursday" layout horizontal center-center flex inline>Thursday</paper-tab>
+            <paper-tab id="friday" layout horizontal center-center flex inline>Friday</paper-tab>
+            <paper-tab id="saturday" layout horizontal center-center flex inline>Saturday</paper-tab>
+            <paper-tab id="sunday" layout horizontal center-center flex inline>Sunday</paper-tab>
+          </paper-tabs>
+          <paper-tabs class="red core-narrow" id="recipient" selected="0">
+
+            <paper-tab id="monday" layout horizontal center-center flex inline>Tracey</paper-tab>
+            <paper-tab id="tuesday" layout horizontal center-center flex inline>Rob</paper-tab>
+            <paper-tab id="wednesday" layout horizontal center-center flex inline>Martin</paper-tab>
+
+          </paper-tabs>
+          <div id="numOfBread">
+          </div>
+          <paper-button id="submit" class="red">Place Order</paper-button>
         </form>
       </section>
       <section id="section1">
@@ -65,11 +79,23 @@
   </template>
 
   <script>
-    Polymer({});
+    Polymer({
+      created: loadForm
+    });
   </script>
 
 </polymer-element>
-
+<script>
+  // This script runs only in chrome
+  // This is a terrible workaround for chrome compatibility.
+  // basically, chrome explicitly supports /deep/ access to shadow divs where
+  // firefox explicitly does not.
+  var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+  var prefix = '';
+  if(is_chrome){
+    prefix = 'body /deep/ ';
+  }
+</script>
 <my-element></my-element>
 </body>
 </html>
